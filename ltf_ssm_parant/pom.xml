@@ -1,0 +1,144 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>cn.edu.cuit.ltf_ssm_parant</groupId>
+  <artifactId>ltf_ssm_parant</artifactId>
+  <version>0.0.1-SNAPSHOT</version>
+  <packaging>pom</packaging>
+  <!-- 1 定义公共属性让子项目集成 -->
+	<properties>
+		<!-- 设置源代编码 -->
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<!-- 设置源代码级别 -->
+		<maven.compiler.source>1.8</maven.compiler.source>
+		<!-- 设置class级别 -->
+		<maven.compiler.target>1.8</maven.compiler.target>
+		<dubbo.version>2.7.2</dubbo.version>
+	</properties>
+	<!-- 2 搞版本控制 -->
+	<dependencyManagement>
+		<dependencies>
+			<!-- 1 spring mvc -->
+			<dependency>
+				<groupId>org.springframework</groupId>
+				<artifactId>spring-webmvc</artifactId>
+				<version>5.1.8.RELEASE</version>
+			</dependency>
+			<!-- 解决jsp页面报错 -->
+			<dependency>
+				<groupId>javax.servlet</groupId>
+				<artifactId>javax.servlet-api</artifactId>
+				<version>3.1.0</version>
+				<scope>provided</scope>
+			</dependency>
+			<!-- 解决运行时类找不到的错误 -->
+			<dependency>
+				<groupId>javax.servlet</groupId>
+				<artifactId>jstl</artifactId>
+				<version>1.2</version>
+			</dependency>
+			<!-- 解决视图解析器错误 -->
+			<dependency>
+				<groupId>com.fasterxml.jackson.core</groupId>
+				<artifactId>jackson-core</artifactId>
+				<version>2.9.9</version>
+			</dependency>
+			<!-- -->
+			<dependency>
+				<groupId>com.fasterxml.jackson.core</groupId>
+				<artifactId>jackson-databind</artifactId>
+				<version>2.9.9</version>
+			</dependency>
+
+			<!-- 2 spring -->
+			<!-- 由于SpringMVC自动添加下面可以省略 -->
+			<dependency>
+				<groupId>org.springframework</groupId>
+				<artifactId>spring-context</artifactId>
+				<version>5.1.8.RELEASE</version>
+			</dependency>
+			<!-- 3 MyBatis跑起来 -->
+			<dependency>
+				<groupId>org.mybatis</groupId>
+				<artifactId>mybatis</artifactId>
+				<version>3.5.1</version>
+			</dependency>
+			<!-- 数据库驱动：要根据你的数据库服务器而变 -->
+			<dependency>
+				<groupId>mysql</groupId>
+				<artifactId>mysql-connector-java</artifactId>
+				<version>5.1.47</version>
+			</dependency>
+			<!-- 4 spring+mybatis 说明：由于springmvc和Spring是一个公司的产品，已经集成在一起 -->
+			<dependency>
+				<groupId>org.mybatis</groupId>
+				<artifactId>mybatis-spring</artifactId>
+				<version>1.3.2</version>
+			</dependency>
+			<dependency>
+				<groupId>com.alibaba</groupId>
+				<artifactId>druid</artifactId>
+				<version>1.1.18</version>
+			</dependency>
+			<!-- 5 为了解决使用框架时候出错了，想看到详细加日志 https://docs.spring.io/spring/docs/5.1.8.RELEASE/spring-framework-reference/htmlsingle/#overview-logging-log4j -->
+			<dependency>
+				<groupId>org.apache.logging.log4j</groupId>
+				<artifactId>log4j-core</artifactId>
+				<version>2.6.2</version>
+			</dependency>
+			<dependency>
+				<groupId>org.apache.logging.log4j</groupId>
+				<artifactId>log4j-jcl</artifactId>
+				<version>2.6.2</version>
+			</dependency>
+			<dependency>
+				<groupId>org.apache.logging.log4j</groupId>
+				<artifactId>log4j-slf4j-impl</artifactId>
+				<version>2.6.2</version>
+			</dependency>
+			<!-- 6 支持事务 -->
+			<dependency>
+				<groupId>org.springframework</groupId>
+				<artifactId>spring-jdbc</artifactId>
+				<version>5.1.8.RELEASE</version>
+			</dependency>
+
+			<!-- 支持AOP -->
+			<dependency>
+				<groupId>org.aspectj</groupId>
+				<artifactId>aspectjweaver</artifactId>
+				<version>1.9.4</version>
+			</dependency>
+			<!-- MyBatis分页 -->
+			<dependency>
+				<groupId>com.github.pagehelper</groupId>
+				<artifactId>pagehelper</artifactId>
+				<version>5.1.10</version>
+			</dependency>
+			<!-- dubbo -->
+			<dependency>
+				<groupId>org.apache.dubbo</groupId>
+				<artifactId>dubbo</artifactId>
+				<version>${dubbo.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.apache.dubbo</groupId>
+				<artifactId>dubbo-dependencies-zookeeper</artifactId>
+				<version>${dubbo.version}</version>
+				<type>pom</type>
+			</dependency>
+			<dependency>
+			<groupId>com.101tec</groupId>
+			<artifactId>zkclient</artifactId>
+			<version>0.11</version>
+		</dependency>
+		</dependencies>
+	</dependencyManagement>
+	<modules>
+		<module>ltf_ssm_api</module>
+		<module>ltf_ssm_entity</module>
+		<module>ltf_ssm_dao</module>
+		<module>ltf_ssm_service</module>
+		<module>ltf_ssm_controller</module>
+		<module>ltf_ssm_common</module>
+	</modules>
+</project>

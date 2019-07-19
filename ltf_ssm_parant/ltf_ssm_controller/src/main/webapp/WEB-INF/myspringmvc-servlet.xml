@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:mybatis-spring="http://mybatis.org/schema/mybatis-spring"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xsi:schemaLocation="http://mybatis.org/schema/mybatis-spring http://mybatis.org/schema/mybatis-spring-1.2.xsd
+		http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.3.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.3.xsd">
+	<!-- 启动注解扫描 -->
+
+	<context:component-scan base-package="ltf_ssm_controller.ssm.controller"></context:component-scan>
+
+	<!-- 视图解析器：完成Controller返回的字符串到哪里找那个视图的问题 下面是我们实战中使用的最多的视图解析器：它实际上并不完成视图解析，它会根据内容再决定调用别的视图解析器 -->
+	<bean
+		class="org.springframework.web.servlet.view.ContentNegotiatingViewResolver"
+		id="viewResolver">
+		<property name="viewResolvers">
+			<list>
+
+				<bean
+					class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+					<property name="prefix" value="/WEB-INF/jsp/" />
+					<property name="suffix" value=".jsp" />
+				</bean>
+			</list>
+		</property>
+		<property name="defaultViews">
+			<list>
+				<bean
+					class="org.springframework.web.servlet.view.json.MappingJackson2JsonView" />
+			</list>
+		</property>
+	</bean>
+	<!-- 开放静态资源 -->
+	<mvc:resources location="/WEB-INF/static/" mapping="/static/**"></mvc:resources>
+	<mvc:annotation-driven></mvc:annotation-driven>
+	<!-- 导入:相对于当前文件导入，由于和类放置在一起，需要添加前缀 -->
+	<import resource="classpath:applicationContext-dubbo-consumer.xml"/>
+</beans>

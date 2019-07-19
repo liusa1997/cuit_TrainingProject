@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:mybatis-spring="http://mybatis.org/schema/mybatis-spring"
+	xsi:schemaLocation="http://mybatis.org/schema/mybatis-spring http://mybatis.org/schema/mybatis-spring-1.2.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.2.xsd">
+<!-- 让mybatis的配置 -->
+	<!-- 配置好数据源 ,替代MyBatis的配置文件 -->
+	<bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource"
+		init-method="init" destroy-method="close">
+		<property name="driverClassName" value="com.mysql.jdbc.Driver"></property>
+		<property name="url" value="jdbc:mysql://localhost:3306/ltf_ssm_net?useSSL=true"></property>
+		<property name="username" value="root"></property>
+		<property name="password" value="root"></property>
+	</bean>
+
+	<!-- 告诉Spring用这个类创建工厂，替代MyBatisUtil -->
+	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<!-- 因为Mybatis的配置文件作用创建DataSource，因而这里配置dataSource属性即可 由于dataSource属性的类型是一个接口，因而我们需要找一个实现类，实战中常用的有： 
+			1 C3P0:https://www.mchange.com/projects/c3p0/ 2 Druid:https://github.com/alibaba/druid/wiki/%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98 
+			Druid是Java语言中最好的数据库连接池。Druid能够提供强大的监控和扩展功能。 -->
+		<property name="dataSource" ref="dataSource"></property>
+		<property name="plugins">
+			<array>
+				<bean class="com.github.pagehelper.PageInterceptor">
+					<property name="properties">
+						<!-- config params as the following -->
+						<value>
+							reasonable=true
+						</value>
+					</property>
+				</bean>
+			</array>
+		</property>
+	</bean>
+	<!-- 让Spring管理Mapper，我们编写好Mapper类后不需要配置了 -->
+	<mybatis-spring:scan base-package="ltf_ssm_dao.mapper" />
+	
+
+</beans>
