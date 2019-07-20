@@ -60,12 +60,14 @@
 			<artifactId>ltf_ssm_api</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
 		</dependency>
+		<!--
 		<!-- 图形验证码 -->
 		<dependency>
 			<groupId>com.github.penggle</groupId>
 			<artifactId>kaptcha</artifactId>
 			<version>2.3.2</version>
 		</dependency>
+		-->
 		<dependency>
 			<groupId>cn.edu.cuit.ltf_ssm_parant</groupId>
 			<artifactId>ltf_ssm_common</artifactId>
