@@ -66,7 +66,7 @@
 			<dependency>
 				<groupId>mysql</groupId>
 				<artifactId>mysql-connector-java</artifactId>
-				<version>5.1.47</version>
+				<version>8.0.28</version>
 			</dependency>
 			<!-- 4 spring+mybatis 说明：由于springmvc和Spring是一个公司的产品，已经集成在一起 -->
 			<dependency>
